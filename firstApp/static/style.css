@@ -1,3 +1,4 @@
+/* Your existing CSS... */
 body {
     background-color: #dbeafe !important;
     font-family: Arial, sans-serif;
@@ -42,6 +43,19 @@ button:hover {
     background-color: #2563eb;
 }
 
+/* Delete button specific styles */
+li button[type="submit"] {
+    background: #ef4444 !important;
+    padding: 6px 10px !important;
+    font-size: 14px !important;
+    margin-left: auto;  /* Push to right */
+}
+
+li button[type="submit"]:hover {
+    background: #dc2626 !important;
+}
+
+/* Task list improvements */
 ul {
     max-width: 500px;
     margin: 0 auto;
@@ -56,12 +70,31 @@ li {
     border-radius: 8px;
     border-left: 4px solid #3b82f6;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-li:before {
-    content: "•";
-    color: #3b82f6;
-    font-weight: bold;
-    font-size: 20px;
-    margin-right: 10px;
+li.completed {
+    border-left-color: #6b7280;
+}
+
+/* Checkbox styling */
+li input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+li span {
+    flex: 1;
+    margin-right: auto;
+}
+
+/* Messages styling */
+div[style*="background: #d1fae5"] {
+    border: 1px solid #a7f3d0;
+}
+
+div[style*="background: #fee2e2"] {
+    border: 1px solid #fca5a5;
 }

@@ -14,7 +14,37 @@
     {% if tasks %}
         <ul>
             {% for task in tasks %}
-                <li>{{ task }}</li>
+                <li style="{% if task.completed %}text-decoration: line-through; opacity: 0.6;{% endif %}">
+                    <!-- Toggle completion form -->
+                    <form method="post" style="display: inline; margin-right: 10px;">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <input type="hidden" name="action" value="toggle">
+                        <input type="checkbox" {% if task.completed %}checked{% endif %} 
+                               onchange="this.form.submit()" 
+                               title="Mark as {{ task.completed|yesno:'complete,incomplete' }}">
+                    </form>
+                    
+                    <!-- Task text -->
+                    <span style="margin-right: 10px;">
+                        {{ task.name }}
+                    </span>
+                    
+                    <!-- Task date -->
+                    <small style="color: #6b7280; margin-right: 10px;">
+                        {{ task.created_at|date:"M d, Y" }}
+                    </small>
+                    
+                    <!-- Delete form -->
+                    <form method="post" style="display: inline;" 
+                          onsubmit="return confirm('Are you sure you want to delete this task?')">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <input type="hidden" name="action" value="delete">
+                        <button type="submit" style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;" 
+                                title="Delete task">X</button>
+                    </form>
+                </li>
             {% endfor %}
         </ul>
         <div style="text-align: center; margin-top: 20px; color: #6b7280;">
