@@ -1,0 +1,7 @@
+Django==5.2.5
+django-tailwind==3.8.0
+
+# Optional: If you want to add more features later
+# djangorestframework==3.14.0  # For API
+# pillow==10.0.0              # For image handling
+# python-decouple==3.8        # For environment variables

@@ -1,0 +1,29 @@
+{% extends 'all_app.html' %}
+{% load static %}
+
+{% block content %}
+<div style="min-height: 70vh; display: flex; flex-direction: column; justify-content: center;">
+    <h1>To-Do List</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="task" placeholder="What needs to be done?" required>
+        <button type="submit">Add Task</button>
+    </form>
+    
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>{{ task }}</li>
+            {% endfor %}
+        </ul>
+        <div style="text-align: center; margin-top: 20px; color: #6b7280;">
+            <small>{{ tasks|length }} task{{ tasks|length|pluralize }} in your list</small>
+        </div>
+    {% else %}
+        <div style="text-align: center; margin-top: 40px; color: #6b7280;">
+            <p><em>No tasks yet. Add one above!</em></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
